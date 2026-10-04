@@ -174,10 +174,10 @@ export function isBlockingAgentsCall(input: unknown): boolean {
 	try {
 		const value = parseAgentsRequest(input);
 		if (value.action === "spawn") {
-			const agentType = requiredAgentField(value.agent_type, "agent_type");
-			if (agentType === "reviewer") return true;
 			return shouldBlockAgentSpawn(
-				loadAgentProfileBlocking(agentType),
+				loadAgentProfileBlocking(
+					requiredAgentField(value.agent_type, "agent_type"),
+				),
 				value.blocking,
 			);
 		}

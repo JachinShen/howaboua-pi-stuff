@@ -126,9 +126,7 @@ export async function spawnAgent(
 	let dispatch;
 	let shared: { agentName?: string; warning?: string } | undefined;
 	let boardAgent: string | undefined;
-	const blocking =
-		profile.name === "reviewer" ||
-		shouldBlockAgentSpawn(profile.blocking, params.blocking);
+	const blocking = shouldBlockAgentSpawn(profile.blocking, params.blocking);
 	try {
 		boardAgent = await boardBinding?.accept(started.agent);
 		shared = await sharing?.accept(started.agent);

@@ -55,7 +55,7 @@ export async function agentsHelp(): Promise<Record<string, unknown>> {
 			detach:
 				"Stop selected membership; retain counterpart checkpoints read-only; idle target",
 			blocking:
-				"spawn/assign default false; profile blocking overrides spawn (reviewer blocks). Use blocking: true to wait; end your turn when only waiting. Completion/blockage arrives after you reply; no polling or sleep waits",
+				"spawn/assign default false; profile blocking overrides spawn (bundled reviewer blocks). Use blocking: true to wait; end your turn when only waiting. Completion/blockage arrives after you reply; no polling or sleep waits",
 			share_context:
 				"Profile false isolates notes/history; otherwise follows controller sharing setting",
 			watch:

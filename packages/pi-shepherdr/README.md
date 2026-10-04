@@ -192,10 +192,10 @@ That directory is authoritative after initialization. Edit a profile to change i
 
 Optional profile settings:
 
-- `blocking`: `true` forces blocking spawns, `false` forces asynchronous spawns. Omission respects the call's `blocking` value, which defaults to `true`. This does not affect `assign` to existing agents.
+- `blocking`: `true` forces blocking spawns, `false` forces asynchronous spawns. Omission respects the call's `blocking` value, which defaults to `false`. This does not affect `assign` to existing agents.
 - `share_context`: `false` opts new spawns out of shared notes and history. Omission or `true` follows the controller setting.
 
-`help` and `list` expose each profile's description and configured settings. Profile names carry no blocking policy. The bundled reviewer profile sets `"blocking": true`; change it to `false` to force asynchronous review, or remove it to choose per call. Existing installed profiles are never overwritten. An existing reviewer without `blocking` now respects the call like any other profile.
+`help` and `list` expose each profile's description and configured settings. Profile names carry no blocking policy. The bundled reviewer profile sets `"blocking": true`; change it to `false` to force asynchronous review, or remove it to choose per call (asynchronous by default). Existing installed profiles are never overwritten. An existing reviewer without `blocking` respects the call like any other profile.
 
 ## Advanced Herdr control
 
