@@ -142,7 +142,7 @@ export function createAgentsTool(fleet: AgentFleet) {
 					runtime,
 					panel,
 					message,
-					params.blocking !== false,
+					params.blocking === true,
 					executionSignal,
 					update,
 					() => runtime.client.sendMessage(panel, attributedMessage),

@@ -79,7 +79,7 @@ const AgentsRequest = Type.Object(
 		blocking: Type.Optional(
 			Type.Boolean({
 				description:
-					"Delegation only; defaults true. False pushes task settlement later",
+					"Delegation only; defaults false. True waits for task settlement",
 			}),
 		),
 		query: Type.Optional(Type.String()),
@@ -159,7 +159,7 @@ export function isBlockingAgentsCall(input: unknown): boolean {
 		const value = parseAgentsRequest(input);
 		if (value.action === "spawn")
 			return shouldBlockAgentSpawn(value.agent_type, value.blocking);
-		return BLOCKING_ACTIONS.has(value.action) && value.blocking !== false;
+		return BLOCKING_ACTIONS.has(value.action) && value.blocking === true;
 	} catch {
 		return false;
 	}
@@ -169,5 +169,5 @@ export function shouldBlockAgentSpawn(
 	agentType: string | undefined,
 	blocking: boolean | undefined,
 ): boolean {
-	return agentType?.trim() === "reviewer" || blocking !== false;
+	return agentType?.trim() === "reviewer" || blocking === true;
 }
