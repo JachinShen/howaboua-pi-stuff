@@ -67,7 +67,7 @@ Call the `agents` tool with `action: "help"` before first use, then send flat re
 | `watch` | Push future settlement from an existing Pi agent |
 | `unwatch` | Stop reporting an agent |
 
-`spawn` and `assign` block by default. Set `blocking: false` when the controller should continue other work immediately. A profile's `blocking` setting overrides the call for `spawn`. Task completion and blockage are then delivered automatically.
+`spawn` and `assign` are asynchronous by default. Set `blocking: true` to wait for settlement. A profile's `blocking` setting overrides the call for `spawn` (the bundled reviewer profile requires blocking). Task completion and blockage are delivered automatically for asynchronous delegation.
 
 `answer` requires the pending `ask_id` from `read` or a blocked report. It returns `accepted` only when that exact Ask persisted the supplied responses; an accepted retry sends no input.
 

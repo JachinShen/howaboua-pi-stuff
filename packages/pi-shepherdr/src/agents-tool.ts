@@ -162,7 +162,7 @@ export function createAgentsTool(
 					runtime,
 					panel,
 					message,
-					params.blocking !== false,
+					params.blocking === true,
 					executionSignal,
 					update,
 					() => runtime.client.sendMessage(panel, attributedMessage),

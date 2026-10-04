@@ -84,7 +84,7 @@ const AgentsRequest = Type.Object(
 		blocking: Type.Optional(
 			Type.Boolean({
 				description:
-					"Delegation only; profile policy overrides spawn; otherwise defaults true",
+					"Delegation only; profile policy overrides spawn; otherwise defaults false",
 			}),
 		),
 		context: Type.Optional(Type.Boolean()),
@@ -173,14 +173,15 @@ export function parseAgentsRequest(input: unknown): AgentsParams {
 export function isBlockingAgentsCall(input: unknown): boolean {
 	try {
 		const value = parseAgentsRequest(input);
-		if (value.action === "spawn")
+		if (value.action === "spawn") {
+			const agentType = requiredAgentField(value.agent_type, "agent_type");
+			if (agentType === "reviewer") return true;
 			return shouldBlockAgentSpawn(
-				loadAgentProfileBlocking(
-					requiredAgentField(value.agent_type, "agent_type"),
-				),
+				loadAgentProfileBlocking(agentType),
 				value.blocking,
 			);
-		return BLOCKING_ACTIONS.has(value.action) && value.blocking !== false;
+		}
+		return BLOCKING_ACTIONS.has(value.action) && value.blocking === true;
 	} catch {
 		return false;
 	}
@@ -190,5 +191,5 @@ export function shouldBlockAgentSpawn(
 	profileBlocking: boolean | undefined,
 	blocking: boolean | undefined,
 ): boolean {
-	return profileBlocking ?? blocking ?? true;
+	return profileBlocking ?? blocking ?? false;
 }
